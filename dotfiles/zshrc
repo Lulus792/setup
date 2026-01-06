@@ -1,0 +1,68 @@
+# --------------------------------------------------
+#  Basic Zsh Settings
+# --------------------------------------------------
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+# Enable prompt substitution
+setopt PROMPT_SUBST
+
+# History settings
+HISTSIZE=5000
+SAVEHIST=5000
+HISTFILE=~/.zsh_history
+setopt INC_APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_ALL_DUPS
+
+# Better navigation
+setopt AUTO_CD
+setopt NO_CASE_GLOB
+
+# --------------------------------------------------
+#  Aliases
+# --------------------------------------------------
+
+# Package management
+alias update='sudo pacman -Syu'
+alias install='sudo pacman -S'
+alias remove='sudo pacman -Rns'
+
+# --------------------------------------------------
+#  zoxide (better cd)
+# --------------------------------------------------
+if command -v starship &>/dev/null; then
+	eval "$(starship init zsh)"
+fi
+
+# --------------------------------------------------
+#  History Search (up and down search command)
+# --------------------------------------------------
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# --------------------------------------------------
+#  Plugins (manual & lightweight)
+# --------------------------------------------------
+
+# Syntax highlighting
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# Autosuggestions
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+source ~/documents/python/hyperspy-env/bin/activate
+
+# --------------------------------------------------
+#  Environment
+# --------------------------------------------------
+export EDITOR="nvim"
+export TERMINAL="kitty"
+export LANG="en_US.UTF-8"
+
+# Enable True color support
+export COLORTERM=truecolor
